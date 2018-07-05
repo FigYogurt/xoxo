@@ -26,7 +26,14 @@ const getInput = player => async () => {
   const [row = 0, col = 0] = ans.coord.split(/[,\s+]/).map(x => +x);
   game.dispatch(move([row, col], turn));
 };
-
+const endGame = () =>{
+  const {winner} = game.getState();
+  if (winner === 'X' || winner === 'O'){
+    console.log(`Congrats ${winner}`)
+    process.exit(0);
+  }
+  
+}
 // Create the store
 const game = createStore(gameReducer);
 
@@ -36,7 +43,7 @@ const game = createStore(gameReducer);
 game.subscribe(printBoard);
 game.subscribe(getInput('X'));
 game.subscribe(getInput('O'));
-
+game.subscribe(endGame)
 // We dispatch a dummy START action to call all our
 // subscribers the first time.
 game.dispatch({ type: 'START' });
