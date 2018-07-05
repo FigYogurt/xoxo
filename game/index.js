@@ -4,7 +4,7 @@ import { createStore } from 'redux';
 let board = Map();
 // board = board.setIn([1, 1], 'X');
 
-// action.type
+// action
 const MOVE = 'MOVE';
 
 export const move = ([row, col], turn) => {
@@ -17,7 +17,7 @@ export const move = ([row, col], turn) => {
   return action;
 };
 
-export default function reducer(state = { board: Map() }, action) {
+export default function reducer(state = { board: Map(), turn: 'X' }, action) {
   switch (action.type) {
     case MOVE:
       return {
