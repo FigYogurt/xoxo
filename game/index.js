@@ -17,10 +17,20 @@ export const move = ([row, col], turn) => {
   return action;
 };
 
-export default function reducer(state = { board: Map(), turn: 'X' }, action) {
+const changeTurn = turn => {
+  if (turn === 'X') {
+    turn = 'O';
+  } else {
+    turn = 'X';
+  }
+  return turn;
+};
+
+export default function reducer(state = { board: board, turn: 'X' }, action) {
   switch (action.type) {
     case MOVE:
       return {
+        turn: changeTurn(action.turn),
         board: board.setIn([action.row, action.col], action.turn),
       };
     default:
