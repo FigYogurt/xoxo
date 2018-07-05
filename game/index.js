@@ -21,7 +21,7 @@ export default function reducer(state = { board: Map(), turn: 'X' }, action) {
   switch (action.type) {
     case MOVE:
       return {
-        board: board.setIn([action.row, action.col], move.action.turn),
+        board: board.setIn([action.row, action.col], action.turn),
       };
     default:
       return state;
